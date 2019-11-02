@@ -20,7 +20,7 @@
     font-size: 14px;
   }
 
-  .journalInput, .journalText {
+  .journalInput, .journalText, .journalTextLarge {
     margin: 0;
     margin-top: 5px;
     padding: 10px;
@@ -34,5 +34,8 @@
   .journalText {
     height: 52px;
     overflow-y: hidden;
+  }
+  .journalTextLarge {
+    min-height: 240px;
   }
 }

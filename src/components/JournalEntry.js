@@ -8,6 +8,7 @@ class JournalEntry extends Component {
     this.renderWrite = this.renderWrite.bind(this);
     this.renderEntry = this.renderEntry.bind(this);
     this.renderLargeEntry = this.renderLargeEntry.bind(this);
+    this.capString = this.capString.bind(this);
   }
   render() {
     if (this.props.write) {
@@ -35,7 +36,7 @@ class JournalEntry extends Component {
         <span className="title prompt-small">{this.props.title}</span>
         <span className="date prompt-small">{this.props.date}</span>
         <span className="prompt prompt-small">{this.props.prompt}</span>
-        <textarea className="journalText col s12" disabled value={this.props.text}>
+        <textarea className="journalText col s12" disabled value={this.capString(this.props.text)}>
         </textarea>
       </div>
     );
@@ -46,10 +47,16 @@ class JournalEntry extends Component {
         <h4 className="title">{this.props.title}</h4>
         <h6 className="date">{this.props.date}</h6>
         <h6 className="prompt">{this.props.prompt}</h6>
-        <textarea className="journalText col s12" disabled value={this.props.text}>
+        <textarea className="journalTextLarge col s12" disabled value={this.props.text}>
         </textarea>
       </div>
     );
+  }
+  capString(str) {
+    if (str.length > 80)
+      return str.substring(0, 80) + '...';
+    else
+      return str;
   }
 }
 

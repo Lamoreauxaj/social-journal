@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@azure/cognitiveservices-textanalytics": "^4.0.0",
+    "@azure/ms-rest-js": "^2.0.4",
     "materialize-css": "^1.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

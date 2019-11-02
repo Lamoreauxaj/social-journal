@@ -1,16 +1,38 @@
 .journal {
   margin-top: 40px;
+  margin-left: 50px;
+  margin-right: 50px;
+  .title {
+    display: block;
+    margin-bottom: -5px;
+  }
   .prompt {
-    font-size: 18px;
+    display: block;
+    color: #666;
+  }
+  .date {
+    color: #666;
+  }
+  .prompt-small, .date-small {
+    font-size: 10px;
+  }
+  .title-small {
+    font-size: 14px;
   }
 
-  .journalText {
-    margin-top: 15px;
-    margin-left: 50px;
-    margin-right: 50px;
+  .journalInput, .journalText {
+    margin: 0;
+    margin-top: 5px;
     padding: 10px;
-    min-height: 240px;
     border-radius: 10px;
     border: solid 2px #aaa;
+    resize: none;
+  }
+  .journalInput {
+    min-height: 240px;
+  }
+  .journalText {
+    height: 52px;
+    overflow-y: hidden;
   }
 }

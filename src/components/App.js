@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Nav from './Nav.js';
 import Home from './Home.js';
+import MyJournal from './MyJournal.js';
+import JournalView from './JournalView.js';
 import Journal from './Journal.js';
 import NotFound from './NotFound.js';
 import './App.css';
@@ -15,7 +17,9 @@ class App extends Component {
             <div className="content">
               <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/journal" component={Journal}/>
+                <Route exact path="/journal" component={MyJournal}/>
+                <Route exact path="/journal/write" component={Journal}/>
+                <Route exact path="/journal/view/:id" component={JournalView}/>
                 <Route exact path="/404" component={NotFound}/>
                 <Redirect to="/404"/>
               </Switch>

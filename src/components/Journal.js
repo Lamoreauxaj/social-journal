@@ -14,7 +14,7 @@ class Journal extends Component {
     return (
       <div className="journal">
         <h4>Journal</h4>
-        <JournalEntry prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
+        <JournalEntry write prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
         <button className="btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
       </div>
     );

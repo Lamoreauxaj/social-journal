@@ -25,6 +25,9 @@ class Home extends Component {
           Journaling is known to reduce stress and boost your mood.
           It even improves physical health as a result.
         </p>
+        <p>
+          Combining this with social interaction is our solution to help alleviate stress, lonliness, and lead to better mental health.
+        </p>
         <button className="btn light-green darken-2">
           Get Started
         </button>

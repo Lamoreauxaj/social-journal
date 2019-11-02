@@ -1,0 +1,16 @@
+.journal {
+  margin-top: 40px;
+  .prompt {
+    font-size: 18px;
+  }
+
+  .journalText {
+    margin-top: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+    min-height: 240px;
+    border-radius: 10px;
+    border: solid 2px #aaa;
+  }
+}

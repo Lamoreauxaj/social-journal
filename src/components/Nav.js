@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './Nav.scss';
 
 class Nav extends Component {
   render() {
     return (
       <div className="navContainer">
-        <nav className="nav-wrapper hide-on-med-and-down light-green">
+        {/* <nav className="nav-wrapper hide-on-med-and-down light-green">
           <a className="brand-logo" href="/">
             <i className="large material-icons">menu_book</i>
             Feels
           </a>
           {this.renderLinks("right")}
-        </nav>
+        </nav> */}
         <div className="contentContainer">
           {this.props.children}
         </div>
@@ -27,7 +28,7 @@ class Nav extends Component {
   renderLinks(direction) {
     return (
       <ul className={`${direction}`}>
-        <li>
+        <li className={this.props.location.pathname === '/journal' ? 'active' : ''}>
           <a href="/journal">
             <i className="large material-icons">notes</i>
             Journal
@@ -38,4 +39,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);

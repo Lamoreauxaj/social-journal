@@ -1,0 +1,52 @@
+.navContainer {
+  max-height: 100vh;
+}
+
+.nav-wrapper {
+}
+
+.brand-logo {
+  position: absolute;
+  left: 20px;
+}
+
+.contentContainer {
+  height: 100%;
+}
+
+.bottomNav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 66px;
+  padding-top: 5px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  .brand-logo {
+    margin-left: 10px;
+    font-size: 20px;
+  }
+
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+  li {
+
+    a {
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+}

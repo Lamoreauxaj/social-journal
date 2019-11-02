@@ -6,6 +6,7 @@
     "@azure/cognitiveservices-textanalytics": "^4.0.0",
     "@azure/ms-rest-js": "^2.0.4",
     "materialize-css": "^1.0.0",
+    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-materialize": "^3.4.1",

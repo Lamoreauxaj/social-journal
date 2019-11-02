@@ -1,0 +1,19 @@
+.home {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+
+  h3 {
+    margin: 0;
+    padding-top: 15px;
+  }
+
+  .featureList {
+    margin-top: 0px;
+    li {
+      list-style-position: inside;
+      list-style-type: circle;
+    }
+  }
+}

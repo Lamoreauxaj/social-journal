@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Footer, Navbar, NavItem } from 'react-materialize';
-import './Nav.css';
+import './Nav.scss';
 
 class Nav extends Component {
   render() {
     return (
       <div className="navContainer">
-        <Navbar brand={<Link className="left" to="/">Feels</Link>} alignLinks="right" className="nav hide-on-med-and-down">
-          <NavItem href="/journal">
-            Journal
-          </NavItem>
-        </Navbar>
+        <nav className="nav-wrapper hide-on-med-and-down light-green">
+          <a className="brand-logo" href="/">
+            <i className="large material-icons">menu_book</i>
+            Feels
+          </a>
+          {this.renderLinks("right")}
+        </nav>
         <div className="contentContainer">
           {this.props.children}
         </div>
-        <Footer className="bottomNav hide-on-large-only">
-          <Link to="/journal">
-            Journal
-          </Link>
-        </Footer>
+        <nav className="bottomNav page-footer hide-on-large-only light-green">
+          <a className="brand-logo left" href="/">
+            <i className="large material-icons">menu_book</i>
+          </a>
+          {this.renderLinks("center")}
+        </nav>
       </div>
+    );
+  }
+  renderLinks(direction) {
+    return (
+      <ul className={`${direction}`}>
+        <li>
+          <a href="/journal">
+            <i className="large material-icons">notes</i>
+            Journal
+          </a>
+        </li>
+      </ul>
     );
   }
 }

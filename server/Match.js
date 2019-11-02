@@ -22,4 +22,4 @@ function calculateSentiment(entry) {
     });
 }
 
-calculateSentiment("I had a really nice day, Aditya is such a thoughtful guy and being with him is helping me get over Kevin");
+calculateSentiment("yo mama so fat, she's holesome");

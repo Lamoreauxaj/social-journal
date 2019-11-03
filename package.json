@@ -16,6 +16,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-async": "^9.0.0",
+    "react-card-carousel": "^1.1.2",
     "react-dom": "^16.11.0",
     "react-materialize": "^3.4.1",
     "react-router-dom": "^5.1.2",

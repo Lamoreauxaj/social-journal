@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PageLayout from './PageLayout.js';
 import './Home.scss';
 
@@ -27,7 +28,7 @@ class Home extends Component {
           <p>
             Combining this with social interaction is our solution to help alleviate stress, lonliness, and lead to better mental health.
           </p>
-          <button className="btn light-green darken-2">
+          <button className="btn light-green darken-2" onClick={() => this.props.history.push('/journal/write')}>
             Get Started
           </button>
         </div>
@@ -36,4 +37,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

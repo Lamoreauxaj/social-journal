@@ -32,9 +32,12 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         });  
         db.run(`CREATE TABLE posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title text,
             name text, 
             email text UNIQUE, 
             post text,
+            prompt text,
+            date DATETIME DEFAULT CURRENT_TIMESTAMP,
             sentiment INTEGER, 
             CONSTRAINT email_unique UNIQUE (email)
             );`,
@@ -43,9 +46,9 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 // Table already created
             }else{
                 // Table just created, creating some rows
-                var insert = 'INSERT INTO posts (name, email, post, sentiment) VALUES (?,?,?,?)'
-                db.run(insert, ["admin","admin@example.com","sample post 123", 1])
-                db.run(insert, ["user","user@example.com", "ayy lmao", -1])
+                var insert = 'INSERT INTO posts (title, name, email, post, prompt, sentiment) VALUES (?,?,?,?,?,?)'
+                db.run(insert, ["bad feels", "admin","admin@example.com","sample post 123", "how was assignment 5 today?", 1])
+                db.run(insert, ["happy feels", "user","user@example.com", "ayy lmao", "what will you do after the hackathon?", -1])
             }
         });  
     }

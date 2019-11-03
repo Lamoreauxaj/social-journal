@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import JournalEntry from './JournalEntry.js';
 import PageLayout from './PageLayout.js';
 import axios from 'axios';
+import './Journal.scss';
 
 class Journal extends Component {
   constructor() {
@@ -22,9 +23,11 @@ class Journal extends Component {
   render() {
     return (
       <PageLayout title="Journal">
-        <JournalEntry write prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
-        <button className="btn green-btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
-        {this.renderSuggestions()}
+        <div className="journalContainer">
+          <JournalEntry write prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
+          <button className="btn green-btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
+          {this.renderSuggestions()}
+        </div>
       </PageLayout>
     );
   }

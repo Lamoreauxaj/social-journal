@@ -49,7 +49,7 @@ class MyJournal extends Component {
   renderPost(post, key) {
     return (
       <div onClick={() => this.onViewEntry(post)} key={key} className="post">
-        <JournalEntry title={post.name} date={post.email} text={post.post} prompt={post.post}/>
+        <JournalEntry title={post.title} date={post.date} text={post.post} prompt={post.prompt}/>
       </div>
     );
   }

@@ -19,7 +19,7 @@ class MyJournal extends Component {
     return (
       <PageLayout className="myJournal" title="My Journal">
         <button onClick={this.onNewEntry} className="newEntryButton btn green-btn light-green darken-2">Write a new entry</button>
-        <h5>My Entries</h5>
+        {/* <h5>My Entries</h5> */}
         {this.renderPosts()}
       </PageLayout>
     );

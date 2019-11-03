@@ -39,6 +39,21 @@ app.get("/api/posts", (req, res, next) => {
       });
 });
 
+app.get("/api/posts/:id", (req, res, next) => {
+    var sql = "select * from posts where id = ?"
+    var params = [req.params.id]
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        })
+      });
+});
+
 app.get("/api/msgs/:name", (req, res, next) => {
     var sql = "select * from msgs where sender = ? or receiver = ?";
     var params = [req.params.name, req.params.name];

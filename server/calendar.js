@@ -182,6 +182,9 @@ async function listEvents(auth) {
 
 module.exports = {
   main: async function() {
+    result = {
+      "events": []
+    };
     return await new Promise((resolve, reject) => {
     fs.readFile('credentials.json', async (err, content) => {
         if (err) return console.log('Error loading client secret file:', err);

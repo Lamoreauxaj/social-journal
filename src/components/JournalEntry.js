@@ -6,12 +6,6 @@ class JournalEntry extends Component {
   constructor(props) {
     super();
 
-    this.state = {
-      title: props.title,
-      prompt: props.prompt,
-      post: props.post
-    };
-
     this.renderWrite = this.renderWrite.bind(this);
     this.renderEntry = this.renderEntry.bind(this);
     this.renderLargeEntry = this.renderLargeEntry.bind(this);
@@ -32,9 +26,9 @@ class JournalEntry extends Component {
   renderWrite() {
     return (
       <div className="journal row">
-        <input className="title" value={this.state.title} onChange={(e) => this.onChange(e, 'title')}></input>
-        <span className="prompt">{this.state.prompt}</span>
-        <textarea value={this.state.post} className="journalInput col s12" placeholder="Journal anything on your mind..." onChange={(e) => this.onChange(e, 'post')}>
+        <input className="title" value={this.props.title} onChange={(e) => this.onChange(e, 'title')}></input>
+        <span className="prompt">{this.props.prompt}</span>
+        <textarea value={this.props.post} className="journalInput col s12" placeholder="Journal anything on your mind..." onChange={(e) => this.onChange(e, 'post')}>
         </textarea>
       </div>
     );
@@ -42,19 +36,12 @@ class JournalEntry extends Component {
   onChange(event, key) {
 
     let obj = {
-      title: this.state.title,
-      prompt: this.state.prompt,
-      post: this.state.post
+      title: this.props.title,
+      prompt: this.props.prompt,
+      post: this.props.post
     };
-    console.log(event.target.value);
     obj[key] = event.target.value;
-    this.setState(obj, () => {
-      this.props.onChange({
-        title: this.state.title,
-        prompt: this.state.prompt,
-        post: this.state.post
-      })
-    })
+    this.props.onChange(obj);
   }
   renderEntry() {
     return (

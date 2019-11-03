@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Async } from 'react-async';
 import JournalEntry from './JournalEntry.js';
 import PageLayout from './PageLayout.js';
 import axios from 'axios';
@@ -9,7 +10,7 @@ class Journal extends Component {
   constructor() {
     super();
     this.state = {
-      obj: { title: 'Short title', prompt: 'Type a short journal entry below.', post: '' }
+     title: 'Short title', prompt: 'Type a short journal entry below.', post: '' 
     }
     this.onSaveEntry = this.onSaveEntry.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -18,17 +19,26 @@ class Journal extends Component {
 
   renderSuggestions() {
     //fetch these suggestions from the code Erika and Virrag wrote
-    var suggestions = ["I worked for 2 hours on my business today", "I went for a run in the morning"];
-    return suggestions.map(suggestion => <button key={suggestion} onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
+    return (
+      <Async promiseFn={this.fetchSuggestions}>
+        {({data, error, isLoading}) => {
+          if (isLoading) return "Loading...";
+          if (data) {
+            const suggestions = data.data;
+           return suggestions.map((suggestion, index) => <button key={index} onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
+          }
+        }}
+      </Async>
+    );
+    // return suggestions.map(suggestion => <button key={suggestion} onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
   }
 
   addSuggestion(event) {
     //TODO: add filtering on props
     this.setState({
-      obj: {
-        ...this.state.obj,
-        post: this.state.obj.post + " " + event.currentTarget.textContent
-      }
+      post: this.state.post + " " + event.currentTarget.textContent
+    }, () => {
+      this.forceUpdate();
     });
   }
 
@@ -36,7 +46,7 @@ class Journal extends Component {
     return (
       <PageLayout title="Journal">
         <div className="journalContainer">
-          <JournalEntry write prompt={this.state.obj.prompt} post={this.state.obj.post} onChange={this.onChange}/>
+          <JournalEntry write prompt={this.state.prompt} post={this.state.post} title={this.state.title} onChange={this.onChange}/>
           <button className="btn green-btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
           {this.renderSuggestions()}
         </div>
@@ -44,12 +54,17 @@ class Journal extends Component {
     );
   }
   onChange(value) {
-    this.setState({ obj: value });
+    console.log(value);
+    this.setState({ ...value });
   }
   async onSaveEntry() {
-    var post = {"name": "admin", ...this.state.obj};
+    var post = {"name": "admin", ...this.state};
     await axios.post('/api/posts/', post);
     this.props.history.push('/journal');
+  }
+
+  async fetchSuggestions() {
+    return await axios.get('/api/suggestions');
   }
 }
 

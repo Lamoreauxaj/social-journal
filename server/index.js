@@ -198,6 +198,7 @@ app.get("/api/match/:name", (req, res, next) => {
 
 app.get('/api/suggestions', async (req, res, next) => {
     res.status(200);
+    console.log(await calendar.main());
     res.json(await calendar.main());
 });
 

@@ -9,7 +9,7 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-var feelings = ["happy", "sad", "angry", "great", "ambivalent", "jealous", "nervous", "sick", "scared"];
+var feelings = ["happy", "great"];
 
 var result = {
     "events": []
@@ -88,6 +88,15 @@ function diaryParagraph(eventArray) {
     eventArray.forEach(function (item) {
         paragraph.push(eventSentence(item));
     });    
+
+    console.log(eventArray);
+
+    for(var i = 0; i < eventArray.length; ++i){
+      if (eventArray[i].description === ('Presentation')) {
+        paragraph.push("I feel nervous");
+      }
+    }
+
     paragraph.push(getRandomFeeling());
     return paragraph;
 }

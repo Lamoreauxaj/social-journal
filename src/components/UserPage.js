@@ -12,7 +12,7 @@ class UserPage extends Component {
       <PageLayout title="Palash Taneja">
         <div className="userContainer">
 
-          <span>You have journaled for the last three days!</span>
+          {/* <span>You have journaled for the last three days!</span> */}
 
           <div className="sentimentCalendar">
             <h5>Sentiment Calendar</h5>

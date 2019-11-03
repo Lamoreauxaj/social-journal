@@ -32,4 +32,6 @@ $dot-space: 22px;
   background-size: $dot-space $dot-space;
   padding-left: 15px;
   padding-right: 15px;
+  display: flex;
+  flex-direction: column;
 }

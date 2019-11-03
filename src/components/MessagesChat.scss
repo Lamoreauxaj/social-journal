@@ -1,0 +1,41 @@
+.message {
+  background-color: #dcedc8;
+  padding: 15px;
+  border-radius: 15px;
+  width: 50%;
+}
+
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.sendMessage {
+  background-color: #fff;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: solid 2px #aaa;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  
+  i {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 12px;
+  }
+}
+
+.messageRight {
+  margin-left: auto;
+  border-bottom-right-radius: 0;
+}
+
+.messageLeft {
+  margin-right: auto;
+  border-bottom-left-radius: 0;
+}

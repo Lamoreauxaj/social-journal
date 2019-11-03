@@ -8,5 +8,12 @@
   .calendarDay {
     margin-left: 3px;
     width: 50px;
+    color:#8bc34a;
+    .sad {
+      color: red;
+    }
+    .nullDay {
+      color: black;
+    }
   }
 }

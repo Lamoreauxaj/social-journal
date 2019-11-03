@@ -6,15 +6,17 @@ class Nav extends Component {
   render() {
     return (
       <div className="navContainer">
-        {/* <nav className="nav-wrapper hide-on-med-and-down light-green">
-          <a className="brand-logo" href="/">
-            <i className="large material-icons">menu_book</i>
-            Feels
-          </a>
-          {this.renderLinks("right")}
-        </nav> */}
-        <div className="contentContainer">
-          {this.props.children}
+        <div style={{flexGrow: "1", display: 'flex', flexDirection: 'column'}}>
+          <nav className="nav-wrapper hide-on-med-and-down light-green">
+            <a className="brand-logo" href="/">
+              <i className="large material-icons">menu_book</i>
+              Feels
+            </a>
+            {this.renderLinks("right")}
+          </nav>
+          <div className="contentContainer">
+            {this.props.children}
+          </div>
         </div>
         <nav className="bottomNav page-footer hide-on-large-only light-green">
           <a className="brand-logo left" href="/">
@@ -28,7 +30,7 @@ class Nav extends Component {
   renderLinks(direction) {
     return (
       <ul className={`${direction}`}>
-        <li className={this.props.location.pathname === '/journal' ? 'active' : ''}>
+        <li className={this.props.location.pathname.substring(0, 8) === '/journal' ? 'active' : ''}>
           <a href="/journal">
             <i className="large material-icons">notes</i>
             Journal

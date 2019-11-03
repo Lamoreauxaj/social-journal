@@ -1,0 +1,35 @@
+.pageTitle {
+  padding: 25px 0;
+  margin: 0;
+  color: white;
+}
+
+$bg-color: #fff;
+$dot-color: #ccc;
+
+$dot-size: 2px;
+$dot-space: 22px;
+
+.pageLayout {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pageContainer {
+  padding-top: 25px;
+  flex-grow: 1;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+  background-size: $dot-space $dot-space;
+  padding-left: 15px;
+  padding-right: 15px;
+}

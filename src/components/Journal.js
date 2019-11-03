@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import JournalEntry from './JournalEntry.js';
+import PageLayout from './PageLayout.js';
 
 class Journal extends Component {
   constructor() {
@@ -12,11 +13,10 @@ class Journal extends Component {
   }
   render() {
     return (
-      <div className="journal">
-        <h4>Journal</h4>
+      <PageLayout title="Journal">
         <JournalEntry write prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
         <button className="btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
-      </div>
+      </PageLayout>
     );
   }
   onChange(event) {

@@ -33,8 +33,8 @@ class JournalEntry extends Component {
   renderEntry() {
     return (
       <div className="journal row">
-        <span className="title prompt-small">{this.props.title}</span>
-        <span className="date prompt-small">{this.props.date}</span>
+        <span className="title title-small">{this.props.title}</span>
+        <span className="date date-small">{this.props.date}</span>
         <span className="prompt prompt-small">{this.props.prompt}</span>
         <textarea className="journalText col s12" disabled value={this.capString(this.props.text)}>
         </textarea>

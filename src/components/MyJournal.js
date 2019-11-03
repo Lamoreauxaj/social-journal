@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Async } from 'react-async';
 import { withRouter } from 'react-router-dom';
 import JournalEntry from './JournalEntry.js';
+import PageLayout from './PageLayout.js';
 import './MyJournal.scss';
 
 class MyJournal extends Component {
@@ -19,12 +20,11 @@ class MyJournal extends Component {
   }
   render() {
     return (
-      <div className="myJournal">
-        <h4>My Journal</h4>
+      <PageLayout className="myJournal" title="My Journal">
         <button onClick={this.onNewEntry} className="newEntryButton btn light-green darken-2">Write a new entry</button>
         <h5>My Entries</h5>
         {this.renderPosts()}
-      </div>
+      </PageLayout>
     );
   }
   renderPosts() {

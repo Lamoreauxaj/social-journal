@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Async } from 'react-async';
-import PropTypes from 'prop-types';
 import JournalEntry from './JournalEntry.js';
+import PageLayout from './PageLayout.js';
 
 class JournalView extends Component {
   constructor() {
@@ -11,19 +11,21 @@ class JournalView extends Component {
   }
   render() {
     return (
-      <div className="journalView">
-        <Async promiseFn={this.getPost}>
-          {({ data, error, isLoading }) => {
-            if (isLoading) return "Loading...";
-            if (error) return "Unable to load entry."
-            if (data) {
-              return (
-                <JournalEntry large title={data.title} prompt={data.prompt} date={data.date} text={data.text}/>
-              );
-            }
-          }}
-        </Async>
-      </div>
+      <PageLayout title="Journal">
+        <div className="journalView">
+          <Async promiseFn={this.getPost}>
+            {({ data, error, isLoading }) => {
+              if (isLoading) return "Loading...";
+              if (error) return "Unable to load entry."
+              if (data) {
+                return (
+                  <JournalEntry large title={data.title} prompt={data.prompt} date={data.date} text={data.text}/>
+                );
+              }
+            }}
+          </Async>
+        </div>
+      </PageLayout>
     );
   }
   getPost() {

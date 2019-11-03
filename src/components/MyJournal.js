@@ -32,6 +32,7 @@ class MyJournal extends Component {
             if (isLoading) return <span>"Loading..."</span>;
             if (error) return "Unable to load entries.";
             if (data) {
+              console.log(data);
               let posts = data.data.data;
               let renderedPosts = [];
               posts.forEach((post, index) => renderedPosts.push(this.renderPost(post, index)));
@@ -54,7 +55,7 @@ class MyJournal extends Component {
     );
   }
   getPosts() {
-    return axios.get("http://localhost:8000/api/posts");
+    return axios.get("/api/posts/user/admin");
   }
   onNewEntry(event) {
     this.props.history.push('/journal/write');

@@ -27,7 +27,7 @@ class UserPage extends Component {
   }
 
   getPosts() {
-    return axios.get("http://localhost:8000/api/posts");
+    return axios.get("/api/posts");
   }
 
   renderCalendarDay(date, view) {
@@ -48,7 +48,6 @@ class UserPage extends Component {
                 
                 var postDate = new Date(post.date);
                 postDate = new Date(postDate.toDateString());
-                console.log(post.date);
 
                 if (date.toDateString() === postDate.toDateString()) {
                   if (post.sentiment > 0.7) {

@@ -36,6 +36,12 @@ class Nav extends Component {
             Journal
           </a>
         </li>
+        <li className={this.props.location.pathname.substring(0, 7) === '/matches' ? 'active' : ''}>
+          <a href="/matches">
+            <i className="large material-icons">stars</i>
+            Matches
+          </a>
+        </li>
         <li className={this.props.location.pathname.substring(0, 9) === '/messages' ? 'active' : ''}>
           <a href="/messages">
             <i className="large material-icons">message</i>

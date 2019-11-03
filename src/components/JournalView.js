@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Async } from 'react-async';
 import JournalEntry from './JournalEntry.js';
 import PageLayout from './PageLayout.js';
+import axios from 'axios';
 
 class JournalView extends Component {
   constructor() {
@@ -18,8 +19,9 @@ class JournalView extends Component {
               if (isLoading) return "Loading...";
               if (error) return "Unable to load entry."
               if (data) {
+                data = data.data.data[0];
                 return (
-                  <JournalEntry large title={data.title} prompt={data.prompt} date={data.date} text={data.text}/>
+                  <JournalEntry large title={data.title} prompt={data.prompt} date={data.date} text={data.post}/>
                 );
               }
             }}
@@ -29,16 +31,7 @@ class JournalView extends Component {
     );
   }
   getPost() {
-    return new Promise((resolve, reject) => {
-      let post = {
-        id: 1,
-        title: 'This is a title',
-        date: 'October 12th, 2019',
-        prompt: 'Write something about your day.',
-        text: 'This is a short journal entry. We submitted Boggle today. Next time, assignment 6 is GOING to be different, no cap.'
-      };
-      resolve(post);
-    });
+    return axios.get(`/api/posts/${this.props.match.params.id}`)
   }
 }
 

@@ -58,12 +58,12 @@ class MessagesChat extends Component {
   }
   async onSendMessage() {
     const msg = { sender: 'admin', receiver: 'squirrel', messages: this.state.message };
-    await axios.post('http://localhost:8000/api/msgs/', msg);
+    await axios.post('/api/msgs/', msg);
     this.setState({ message: '' });
     this.reloadChat();
   }
   getChatHistory() {
-    return axios.get("http://localhost:8000/api/msgs/admin");
+    return axios.get("/api/msgs/admin");
   }
 }
 

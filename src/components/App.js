@@ -8,6 +8,7 @@ import Journal from './Journal.js';
 import MessagesList from './MessagesList.js';
 import MessagesChat from './MessagesChat.js';
 import UserPage from './UserPage.js';
+import MatchesPage from './MatchesPage.js';
 import NotFound from './NotFound.js';
 import './App.css';
 
@@ -26,6 +27,7 @@ class App extends Component {
                 <Route exact path="/messages" component={MessagesList}/>
                 <Route exact path="/messages/chat/:id" component={MessagesChat}/>
                 <Route exact path="/user" component={UserPage}/>
+                <Route exact path="/matches" component={MatchesPage}/>
                 <Route exact path="/404" component={NotFound}/>
                 <Redirect to="/404"/>
               </Switch>

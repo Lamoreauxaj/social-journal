@@ -9,7 +9,7 @@ class Journal extends Component {
   constructor() {
     super();
     this.state = {
-      entry: ''
+      obj: { title: 'Short title', prompt: 'Type a short journal entry below.', post: '' }
     }
     this.onSaveEntry = this.onSaveEntry.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -19,13 +19,16 @@ class Journal extends Component {
   renderSuggestions() {
     //fetch these suggestions from the code Erika and Virrag wrote
     var suggestions = ["I worked for 2 hours on my business today", "I went for a run in the morning"];
-    return suggestions.map(suggestion => <button onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
+    return suggestions.map(suggestion => <button key={suggestion} onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
   }
 
   addSuggestion(event) {
     //TODO: add filtering on props
     this.setState({
-      entry: this.state.entry + " " + event.currentTarget.textContent
+      obj: {
+        ...this.state.obj,
+        post: this.state.obj.post + " " + event.currentTarget.textContent
+      }
     });
   }
 
@@ -33,19 +36,19 @@ class Journal extends Component {
     return (
       <PageLayout title="Journal">
         <div className="journalContainer">
-          <JournalEntry write prompt="Type a short journal entry below." text={this.state.entry} onChange={this.onChange}/>
+          <JournalEntry write prompt={this.state.obj.prompt} post={this.state.obj.post} onChange={this.onChange}/>
           <button className="btn green-btn saveButton light-green darken-2" onClick={this.onSaveEntry}>Save Entry</button>
           {this.renderSuggestions()}
         </div>
       </PageLayout>
     );
   }
-  onChange(event) {
-    this.setState({ entry: event.target.value });
+  onChange(value) {
+    this.setState({ obj: value });
   }
   async onSaveEntry() {
-    var post = {"name": "erika", "post": this.state.entry};
-    await axios.post('http://localhost:8000/api/posts/', post);
+    var post = {"name": "admin", ...this.state.obj};
+    await axios.post('/api/posts/', post);
     this.props.history.push('/journal');
   }
 }

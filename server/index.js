@@ -15,7 +15,7 @@ var sentiment = require("./Match.js")
 // Server port
 var HTTP_PORT = 8000 
 // Start server
-app.listen(HTTP_PORT, () => {
+app.listen(HTTP_PORT, '0.0.0.0', () => {
     console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
 });
 // Root endpoint
@@ -38,6 +38,21 @@ app.get("/api/posts", (req, res, next) => {
         })
       });
 });
+
+app.get('/api/posts/user/:name', (req, res, next) => {
+    var sql = "select * from posts where name = ?"
+    var params = [req.params.name]
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        })
+      });
+})
 
 app.get("/api/posts/:id", (req, res, next) => {
     var sql = "select * from posts where id = ?"
@@ -117,6 +132,12 @@ app.post("/api/posts/", (req, res, next) => {
     if (!req.body.post){
         errors.push("No post text");
     }
+    if (!req.body.title){
+        errors.push("No post title");
+    }
+    if (!req.body.prompt){
+        errors.push("No post prompt");
+    }
     if (errors.length){
         res.status(400).json({"error":errors.join(",")});
         return;
@@ -127,8 +148,8 @@ app.post("/api/posts/", (req, res, next) => {
     }
     sentiment.calculateSentiment(data.post)
     .then(function(score) {
-        var sql ='INSERT INTO posts (name, post, sentiment) VALUES (?,?,?)'
-        var params =[data.name, data.post, score.documents[0].score]
+        var sql ='INSERT INTO posts (title, prompt, name, post, sentiment) VALUES (?, ?, ?,?,?)'
+        var params =[req.body.title, req.body.prompt, data.name, data.post, score.documents[0].score]
         console.log(params);
         db.run(sql, params, function (err, result) {
             if (err){
@@ -171,8 +192,7 @@ app.get("/api/match/:name", (req, res, next) => {
 
             res.json(minElement);
         });
-
-      });
+    });
 });
 
 

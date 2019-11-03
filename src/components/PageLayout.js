@@ -7,8 +7,10 @@ class PageLayout extends Component {
     return (
       <div className={`pageLayout light-green ${this.props.className}`}>
         <h4 className="pageTitle light-green">{this.props.title}</h4>
-        <div className="pageContainer">
-          {this.props.children}
+        <div className="pageContainer row">
+          <div className="col m8 offset-m2 l6 offset-l3">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );

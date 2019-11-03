@@ -10,7 +10,7 @@ class Nav extends Component {
           <nav className="nav-wrapper hide-on-med-and-down light-green">
             <a className="brand-logo" href="/">
               <i className="large material-icons">menu_book</i>
-              Feels
+              feels
             </a>
             {this.renderLinks("right")}
           </nav>

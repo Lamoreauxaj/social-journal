@@ -16,7 +16,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             post text,
             sentiment INTEGER, 
             CONSTRAINT email_unique UNIQUE (email)
-            )`,
+            );`,
         (err) => {
             if (err) {
                 // Table already created
@@ -29,6 +29,5 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         });  
     }
 });
-
 
 module.exports = db

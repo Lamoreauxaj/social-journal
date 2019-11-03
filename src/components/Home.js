@@ -5,7 +5,7 @@ import './Home.scss';
 class Home extends Component {
   render() {
     return (
-      <PageLayout title="Feels">
+      <PageLayout title="feels">
         <div className="home">
           <h5>A Social Journaling Experience</h5>
           <h6>Features:</h6>

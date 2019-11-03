@@ -42,6 +42,12 @@ class Nav extends Component {
             Messages
           </a>
         </li>
+        <li className={this.props.location.pathname.substring(0, 5) === '/user' ? 'active' : ''}>
+          <a href="/user">
+            <i className="large material-icons">face</i>
+            User
+          </a>
+        </li>
       </ul>
     );
   }

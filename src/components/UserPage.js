@@ -45,10 +45,10 @@ class UserPage extends Component {
               <i className="material-icons small">fiber_manual_record</i>
               );
               posts.forEach((post, index) => {
-
+                
                 var postDate = new Date(post.date);
                 postDate = new Date(postDate.toDateString());
-                // console.log(postDate);
+                console.log(post.date);
 
                 if (date.toDateString() === postDate.toDateString()) {
                   if (post.sentiment > 0.7) {

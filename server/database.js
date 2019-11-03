@@ -46,9 +46,9 @@ let db = new sqlite3.Database(DBSOURCE, async (err) => {
             }else{
                 // Table just created, creating some rows
                 console.log('nani');
-                var insert = 'INSERT INTO posts (title, name, post, prompt, sentiment) VALUES (?,?,?,?,?)'
-                db.run(insert, ["bad feels", "admin","sample post 123", "how was assignment 5 today?", 1])
-                db.run(insert, ["happy feels", "user", "ayy lmao", "what will you do after the hackathon?", -1])
+                var insert = 'INSERT INTO posts (title, name, post, prompt, date, sentiment) VALUES (?,?,?,?,?,?)'
+                db.run(insert, ["bad feels", "admin","sample post 123", "how was assignment 5 today?", "2019-11-02 00:00:00", 1])
+                db.run(insert, ["happy feels", "user", "ayy lmao", "what will you do after the hackathon?", "2019-11-01 00:00:00", -1])
             }
         });  
     }

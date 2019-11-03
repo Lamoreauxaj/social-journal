@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PageLayout from './PageLayout.js';
 import Calendar from 'react-calendar';
+import { Async } from 'react-async';
+import axios from 'axios';
+
 import './UserPage.scss';
 
 class UserPage extends Component {
@@ -22,29 +25,72 @@ class UserPage extends Component {
       </PageLayout>
     );
   }
+
+  getPosts() {
+    return axios.get("http://localhost:8000/api/posts");
+  }
+
   renderCalendarDay(date, view) {
-    const ran = Math.random();
-    if (ran < .25) {
-      return (
-        <span className="calendarDay">
-          <i className="material-icons small">exposure_neg_1</i>
-        </span>
-      );
-    }
-    else if (ran < .75) {
-      return (
-        <span className="calendarDay">
-          <i className="material-icons small">exposure_plus_1</i>
-        </span>
-      );
-    }
-    else {
-      return (
-        <span className="calendarDay">
-          <i className="material-icons small">exposure_plus_2</i>
-        </span>
-      );
-    }
+    return (<Async promiseFn={this.getPosts}>
+          {({ data, error, isLoading}) => {
+            if (error) return (
+              <span className="calendarDay">
+              <i className="material-icons small">help_outline</i>
+              </span>
+            );
+
+            if (data) {
+              let posts = data.data.data;
+              let renderedDate = (
+              <i className="material-icons small">help_outline</i>
+              );
+              posts.forEach((post, index) => {
+
+                var postDate = new Date(post.date);
+                postDate = new Date(postDate.toDateString());
+                // console.log(postDate);
+
+                if (date.toDateString() === postDate.toDateString()) {
+                  if (post.sentiment > 0.7) {
+                      renderedDate = (<i className="material-icons small" style={{color : "green !important"}}>sentiment_satisfied</i>)
+                  } else if (post.sentiment > 0.9) {
+                      renderedDate = (<i className="material-icons small">sentiment_very_satisfied</i>)
+                  } else {
+                      renderedDate = (<i className="material-icons small">sentiment_dissatisfied</i>)
+                  }
+                }
+              });
+              return (
+                <span className="calendarDay">
+                  {renderedDate}
+                </span>
+              );
+            }
+          }}
+        </Async>);
+
+    // const ran = Math.random();
+    // if (ran < .25) {
+    //   return (
+    //     <span className="calendarDay">
+    //       <i className="material-icons small">exposure_neg_1</i>
+    //     </span>
+    //   );
+    // }
+    // else if (ran < .75) {
+    //   return (
+    //     <span className="calendarDay">
+    //       <i className="material-icons small">exposure_plus_1</i>
+    //     </span>
+    //   );
+    // }
+    // else {
+    //   return (
+    //     <span className="calendarDay">
+    //       <i className="material-icons small">exposure_plus_2</i>
+    //     </span>
+    //   );
+    // }
   }
 }
 

@@ -11,6 +11,9 @@ class Journal extends Component {
     this.onSaveEntry = this.onSaveEntry.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
+  
+
   render() {
     return (
       <PageLayout title="Journal">

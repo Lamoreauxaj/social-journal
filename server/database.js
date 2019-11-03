@@ -9,6 +9,23 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
       throw err
     }else{
         console.log('Connected to the SQLite database.')
+        db.run(`CREATE TABLE msgs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sender text, 
+            receiver text, 
+            messages text,
+            sentiment INTEGER
+            );`,
+        (err) => {
+            if (err) {
+                // Table already created
+            }else{
+                // Table just created, creating some rows
+                var insert = 'INSERT INTO msgs (sender, receiver, messages, sentiment) VALUES (?,?,?,?)'
+                db.run(insert, ["admin","palash","sample post 123", 1])
+                db.run(insert, ["user","erika", "ayy lmao", -1])
+            }
+        });  
         db.run(`CREATE TABLE posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name text, 

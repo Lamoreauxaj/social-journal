@@ -36,6 +36,21 @@ app.get("/api/posts", (req, res, next) => {
       });
 });
 
+app.get("/api/msgs", (req, res, next) => {
+    var sql = "select * from msgs"
+    var params = []
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message": "success",
+            "data": rows
+        })
+      });
+});
+
 app.post("/api/posts/", (req, res, next) => {
     var errors=[]
     if (!req.body.post){

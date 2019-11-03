@@ -72,6 +72,38 @@ app.post("/api/posts/", (req, res, next) => {
     });
 })
 
+app.get("/api/match/:name", (req, res, next) => {
+    var sql = "select * from posts where name = ?"
+    var sql2 = "select * from posts where name != ?"
+    var params = [req.params.name]
+    db.all(sql, params, (err, current) => {
+        if (err) {
+          res.status(400).json({"error": err.message});
+          return;
+        }
+        
+        db.all(sql2, params, (err, others) => {
+            if (err) {
+                res.status(400).json({"error": err.message})
+                return;
+            }
+            
+            var min = 100;
+            var minElement = others[0];
+            for(var i = 0; i < others.length; ++i) {
+                if (Math.abs(others[i].sentiment - current[0].sentiment) < min) {
+                    minElement = others[i];
+                    min = Math.abs(others[i].sentiment - current[0].sentiment);
+                }
+            }        
+
+            res.json(minElement);
+        });
+
+      });
+});
+
+
 // Default response for any other request
 app.use(function(req, res){
     res.status(404);

@@ -102,22 +102,18 @@ app.post("/api/posts/", (req, res, next) => {
     if (!req.body.post){
         errors.push("No post text");
     }
-    if (!req.body.email){
-        errors.push("No email specified");
-    }
     if (errors.length){
         res.status(400).json({"error":errors.join(",")});
         return;
     }
     var data = {
         name: req.body.name,
-        email: req.body.email,
         post : req.body.post
     }
     sentiment.calculateSentiment(data.post)
     .then(function(score) {
-        var sql ='INSERT INTO posts (name, email, post, sentiment) VALUES (?,?,?,?)'
-        var params =[data.name, data.email, data.post, score.documents[0].score]
+        var sql ='INSERT INTO posts (name, post, sentiment) VALUES (?,?,?)'
+        var params =[data.name, data.post, score.documents[0].score]
         console.log(params);
         db.run(sql, params, function (err, result) {
             if (err){

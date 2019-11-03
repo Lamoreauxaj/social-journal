@@ -35,7 +35,7 @@ class Journal extends Component {
     this.setState({ entry: event.target.value });
   }
   async onSaveEntry() {
-    var post = {"name": "erika", "email": "eatan18@gmail.com", "post": this.state.entry};
+    var post = {"name": "erika", "post": this.state.entry};
     await axios.post('http://localhost:8000/api/posts/', post);
     this.props.history.push('/journal');
   }

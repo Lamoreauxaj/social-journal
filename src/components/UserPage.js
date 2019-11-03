@@ -35,14 +35,14 @@ class UserPage extends Component {
           {({ data, error, isLoading}) => {
             if (error) return (
               <span className="calendarDay">
-              <i className="material-icons small">help_outline</i>
+              <i className="material-icons small">fiber_manual_record</i>
               </span>
             );
 
             if (data) {
               let posts = data.data.data;
               let renderedDate = (
-              <i className="material-icons small">help_outline</i>
+              <i className="material-icons small">fiber_manual_record</i>
               );
               posts.forEach((post, index) => {
 
@@ -52,7 +52,7 @@ class UserPage extends Component {
 
                 if (date.toDateString() === postDate.toDateString()) {
                   if (post.sentiment > 0.7) {
-                      renderedDate = (<i className="material-icons small" style={{color : "green !important"}}>sentiment_satisfied</i>)
+                      renderedDate = (<i className="material-icons small">sentiment_very_satisfied</i>)
                   } else if (post.sentiment > 0.9) {
                       renderedDate = (<i className="material-icons small">sentiment_very_satisfied</i>)
                   } else {

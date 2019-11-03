@@ -13,11 +13,20 @@ class Journal extends Component {
     }
     this.onSaveEntry = this.onSaveEntry.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.addSuggestion = this.addSuggestion.bind(this);
   }
 
   renderSuggestions() {
+    //fetch these suggestions from the code Erika and Virrag wrote
     var suggestions = ["I worked for 2 hours on my business today", "I went for a run in the morning"];
-    return suggestions.map(suggestion => <button className="btn gray-btn saveButton">{suggestion}</button>);
+    return suggestions.map(suggestion => <button onClick={this.addSuggestion} className="btn gray-btn saveButton">{suggestion}</button>);
+  }
+
+  addSuggestion(event) {
+    //TODO: add filtering on props
+    this.setState({
+      entry: this.state.entry + " " + event.currentTarget.textContent
+    });
   }
 
   render() {

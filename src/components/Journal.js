@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import JournalEntry from './JournalEntry.js';
 import PageLayout from './PageLayout.js';
+import axios from 'axios';
 
 class Journal extends Component {
   constructor() {
@@ -29,9 +31,11 @@ class Journal extends Component {
   onChange(event) {
     this.setState({ entry: event.target.value });
   }
-  onSaveEntry() {
-    
+  async onSaveEntry() {
+    var post = {"name": "erika", "email": "eatan18@gmail.com", "post": this.state.entry};
+    await axios.post('http://localhost:8000/api/posts/', post);
+    this.props.history.push('/journal');
   }
 }
 
-export default Journal;
+export default withRouter(Journal);

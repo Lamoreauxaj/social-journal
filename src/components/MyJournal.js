@@ -4,14 +4,11 @@ import { withRouter } from 'react-router-dom';
 import JournalEntry from './JournalEntry.js';
 import PageLayout from './PageLayout.js';
 import './MyJournal.scss';
+import axios from 'axios';
 
 class MyJournal extends Component {
   constructor() {
     super();
-
-    this.state = {
-      posts: []
-    }
 
     this.renderPosts = this.renderPosts.bind(this);
     this.renderPost = this.renderPost.bind(this);
@@ -32,12 +29,12 @@ class MyJournal extends Component {
       <div className="posts">
         <Async promiseFn={this.getPosts}>
           {({ data, error, isLoading}) => {
-            if (isLoading) return "Loading...";
+            if (isLoading) return <span>"Loading..."</span>;
             if (error) return "Unable to load entries.";
             if (data) {
+              let posts = data.data.data;
               let renderedPosts = [];
-              data.forEach((post, index) => renderedPosts.push(this.renderPost(post, index)))
-              console.log(renderedPosts);
+              posts.forEach((post, index) => renderedPosts.push(this.renderPost(post, index)));
               return (
                 <div>
                   {renderedPosts}
@@ -52,30 +49,12 @@ class MyJournal extends Component {
   renderPost(post, key) {
     return (
       <div onClick={() => this.onViewEntry(post)} key={key} className="post">
-        <JournalEntry title={post.title} date={post.date} text={post.text} prompt={post.prompt}/>
+        <JournalEntry title={post.name} date={post.email} text={post.post} prompt={post.post}/>
       </div>
     );
   }
   getPosts() {
-    return new Promise((resolve, reject) => {
-      let posts = [
-        {
-          id: 1,
-          title: 'This is a title',
-          date: 'October 12th, 2019',
-          prompt: 'Write something about your day.',
-          text: 'This is a short journal entry. We submitted Boggle today. Next time, assignment 6 is GOING to be different, no cap.'
-        },
-        {
-          id: 2,
-          title: 'Another Entry',
-          date: 'October 10th, 2019',
-          prompt: 'How have you been feeling?',
-          text: 'I have been dreaming of Tetris a bit much. I think it\'s becoming a problem.'
-        }
-      ];
-      resolve(posts);
-    });
+    return axios.get("http://localhost:8000/api/posts");
   }
   onNewEntry(event) {
     this.props.history.push('/journal/write');

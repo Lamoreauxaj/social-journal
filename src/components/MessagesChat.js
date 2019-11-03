@@ -3,12 +3,20 @@ import { withRouter } from 'react-router-dom';
 import Async from 'react-async';
 import PageLayout from './PageLayout.js';
 import './MessagesChat.scss';
+import axios from 'axios';
 
 class MessagesChat extends Component {
   constructor() {
     super();
+
+    this.state = {
+      message: '',
+      messages: []
+    };
+
     this.renderMessages = this.renderMessages.bind(this);
     this.getChatHistory = this.getChatHistory.bind(this);
+    this.onSendMessage = this.onSendMessage.bind(this);
   }
   render() {
     return (
@@ -16,8 +24,8 @@ class MessagesChat extends Component {
         <div className="messagesContainer">
           {this.renderMessages()}
           <div className="sendMessage">
-            <input placeholder="Send a message..."></input>
-            <i className="material-icons">send</i>
+            <input placeholder="Send a message..." value={this.state.message} onChange={event => this.setState({message: event.target.value})}></input>
+            <i className="material-icons" onClick={this.onSendMessage}>send</i>
           </div>
         </div>
       </PageLayout>
@@ -25,17 +33,19 @@ class MessagesChat extends Component {
   }
   renderMessages() {
     return (
-      <div>
+      <div className="messages">
         <Async promiseFn={this.getChatHistory}>
-          {({ data, error, isLoading }) => {
+          {({ data, error, isLoading, reload }) => {
+            this.reloadChat = reload;
             if (isLoading) return "Loading...";
             if (error) return "Unable to load chat.";
             if (data) {
+              let msgs = data.data.data;
               let messages = [];
-              data.forEach((message) => {
+              msgs.forEach((message) => {
                 messages.push(
-                  <div className={"message " + (message.me ? 'messageRight' : 'messageLeft')} key={message.id}>
-                    {message.message}
+                  <div className={"message " + (message.sender === 'admin' ? 'messageRight' : 'messageLeft')} key={message.id}>
+                    {message.messages}
                   </div>
                 );
               })
@@ -46,27 +56,14 @@ class MessagesChat extends Component {
       </div>
     )
   }
+  async onSendMessage() {
+    const msg = { sender: 'admin', receiver: 'squirrel', messages: this.state.message };
+    await axios.post('http://localhost:8000/api/msgs/', msg);
+    this.setState({ message: '' });
+    this.reloadChat();
+  }
   getChatHistory() {
-    return new Promise((resolve, reject) => {
-      const messages = [
-        {
-          id: 1,
-          me: true,
-          message: 'Hey, are you dreaming of Tetris?\nI have a problem now'
-        },
-        {
-          id: 2,
-          me: false,
-          message: 'Kinda, but now Boggle is getting me!'
-        },
-        {
-          id: 3,
-          me: true,
-          message: 'Thanks, at least I know somebody else is struggling!'
-        }
-      ];
-      resolve(messages);
-    });
+    return axios.get("http://localhost:8000/api/msgs/admin");
   }
 }
 

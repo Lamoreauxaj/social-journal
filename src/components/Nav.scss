@@ -1,8 +1,10 @@
 .navContainer {
-  max-height: 100vh;
-}
-
-.nav-wrapper {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
 }
 
 .brand-logo {
@@ -11,16 +13,14 @@
 }
 
 .contentContainer {
+  margin-top: 20px;
+  margin-bottom: 30px;
   height: 100%;
 }
 
 .bottomNav {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  min-height: 66px;
-  padding-top: 5px;
+  min-height: 60px;
+  padding-top: 0;
   margin-bottom: 0;
   padding-bottom: 0;
 

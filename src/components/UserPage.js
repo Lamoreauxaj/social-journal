@@ -42,7 +42,7 @@ class UserPage extends Component {
             if (data) {
               let posts = data.data.data;
               let renderedDate = (
-              <i className="material-icons small">fiber_manual_record</i>
+              <i className="material-icons small nullDay">fiber_manual_record</i>
               );
               posts.forEach((post, index) => {
                 
@@ -52,11 +52,11 @@ class UserPage extends Component {
 
                 if (date.toDateString() === postDate.toDateString()) {
                   if (post.sentiment > 0.7) {
-                      renderedDate = (<i className="material-icons small">sentiment_very_satisfied</i>)
+                      renderedDate = (<i className="material-icons small happy">sentiment_very_satisfied</i>)
                   } else if (post.sentiment > 0.9) {
-                      renderedDate = (<i className="material-icons small">sentiment_very_satisfied</i>)
+                      renderedDate = (<i className="material-icons small happy">sentiment_very_satisfied</i>)
                   } else {
-                      renderedDate = (<i className="material-icons small">sentiment_dissatisfied</i>)
+                      renderedDate = (<i className="material-icons small sad">sentiment_dissatisfied</i>)
                   }
                 }
               });

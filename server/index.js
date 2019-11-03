@@ -3,6 +3,7 @@ var express = require("express")
 const cors = require('cors')
 var app = express()
 var db = require("./database.js")
+var calendar = require('./calendar.js')
 
 app.use(cors())
 
@@ -193,6 +194,11 @@ app.get("/api/match/:name", (req, res, next) => {
             res.json(minElement);
         });
     });
+});
+
+app.get('/api/suggestions', async (req, res, next) => {
+    res.status(200);
+    res.json(await calendar.main());
 });
 
 

@@ -15,9 +15,23 @@
 
 .btn {
   border-radius: 10px;
-  box-shadow: 1px 2.5px #33691e;
+  margin: 10px; 
 }
 
-.btn:hover {
-  box-shadow: 1px 3.5px #33691e;
+.green-btn {
+  box-shadow: 1px 3px #33691e;
+}
+
+.green-btn:hover {
+  box-shadow: 1px 4px #33691e;
+}
+
+.gray-btn {
+  background-color: #aaa;
+  box-shadow: 1px 3px #777;
+}
+
+.gray-btn:hover {
+  background-color: #aaa;
+  box-shadow: 1px 4px #777;
 }
